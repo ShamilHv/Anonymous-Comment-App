@@ -16,6 +16,7 @@ namespace ANONYMOUS_SURVEY.Data
         public DbSet<Admin> Admins { get; set; }
         public DbSet<Models.File> Files { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<Comment> Auth { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -32,11 +33,11 @@ namespace ANONYMOUS_SURVEY.Data
             .HasForeignKey(s => s.DepartmentId)
             .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<Admin>()
-               .HasOne(a => a.Subject)
-               .WithMany(s => s.Admins)
-               .HasForeignKey(a => a.SubjectId)
-               .OnDelete(DeleteBehavior.Cascade);
+            // modelBuilder.Entity<Admin>()
+            //    .HasOne(a => a.Subject)
+            //    .WithMany(s => s.Admins)
+            //    .HasForeignKey(a => a.SubjectId)
+            //    .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Admin>()
                 .HasIndex(a => a.Email)
@@ -60,11 +61,11 @@ namespace ANONYMOUS_SURVEY.Data
                 .HasForeignKey(c => c.FileId)
                 .OnDelete(DeleteBehavior.SetNull);
 
-            modelBuilder.Entity<Comment>()
-                .HasOne(c => c.Admin)
-                .WithMany(a => a.AdminComments)
-                .HasForeignKey(c => c.AdminId)
-                .OnDelete(DeleteBehavior.SetNull);
+            // modelBuilder.Entity<Comment>()
+            //     .HasOne(c => c.Admin)
+            //     .WithMany(a => a.AdminComments)
+            //     .HasForeignKey(c => c.AdminId)
+            //     .OnDelete(DeleteBehavior.SetNull);
         }
 
     }

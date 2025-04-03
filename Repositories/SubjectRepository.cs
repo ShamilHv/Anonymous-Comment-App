@@ -1,4 +1,5 @@
 using ANONYMOUS_SURVEY.Data;
+using ANONYMOUS_SURVEY.DTOs;
 using ANONYMOUS_SURVEY.Models;
 using ANONYMOUS_SURVEY.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -37,6 +38,11 @@ namespace ANONYMOUS_SURVEY.Repositories
         public async Task<Subject> GetByIdAsync(int id)
         {
             return await _context.Subjects.FindAsync(id);
+        }
+
+        public async Task<Subject> GetSubjectByComment(Comment comment)
+        {
+            return await _context.Subjects.Where(s=>s.SubjectId==comment.SubjectId).FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<Subject>> GetSubjectsByDepartment(int departmentId)

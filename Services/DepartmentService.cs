@@ -34,6 +34,20 @@ namespace ANONYMOUS_SURVEY.Services
             return MapToDepartmentDto(addedDepartment);
         }
 
+        public async Task DeleteDepartmentAsync(int departmentId)
+        {
+            await _departmentrepository.DeleteAsync(departmentId);
+        }
+
+        public async Task<IEnumerable<DepartmentDto>> GetAllDepartmentsAsync()
+        {
+            var departments=await _departmentrepository.GetAllAsync();
+            if(!departments.Any()){
+                throw new Exception("No Departments as of now");
+            }
+            return departments.Select(MapToDepartmentDto);
+        }
+
         public async Task<DepartmentDto> GetDepartmentByIdAsync(int departmentId)
         {
             var department = await _departmentrepository.GetByIdAsync(departmentId);

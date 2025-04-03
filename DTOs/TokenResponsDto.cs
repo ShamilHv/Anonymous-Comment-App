@@ -6,6 +6,5 @@ namespace ANONYMOUS_SURVEY.DTOs
         public required string RefreshToken{get;set;}
         
     }
-    
-        
+
 }

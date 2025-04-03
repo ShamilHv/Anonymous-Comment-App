@@ -11,6 +11,5 @@ namespace ANONYMOUS_SURVEY.DTOs
         public bool HasFile { get; set; }
         public string? FilePath { get; set; }
         public bool IsAdminComment { get; set; }
-        public string? AdminName { get; set; }
     }
 }

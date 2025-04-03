@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
 using ANONYMOUS_SURVEY.DTOs;
 using ANONYMOUS_SURVEY.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
@@ -82,23 +83,24 @@ namespace ANONYMOUS_SURVEY.Controllers
             }
         }
 
-        // [HttpPost("admin")]
-        // public async Task<ActionResult<CommentDto>> CreateAdminComment(CreateAdminCommentDto createAdminCommentDto)
-        // {
-        //     try
-        //     {
-        //         var comment = await _commentService.CreateAdminCommentAsync(createAdminCommentDto, adminId);
-        //         return CreatedAtAction(nameof(GetComment), new { id = comment.CommentId }, comment);
-        //     }
-        //     catch (KeyNotFoundException ex)
-        //     {
-        //         return NotFound(ex.Message);
-        //     }
-        //     catch (Exception ex)
-        //     {
-        //         return StatusCode(500, $"Internal server error: {ex.Message}");
-        //     }
-        // }
+        [Authorize]
+        [HttpPost("admin-comment")]
+        public async Task<ActionResult<CommentDto>> CreateAdminComment(CreateAdminCommentDto createAdminCommentDto)
+        {
+            try
+            {
+                var comment = await _commentService.CreateAdminCommentAsync(createAdminCommentDto);
+                return CreatedAtAction(nameof(GetComment), new { id = comment.CommentId }, comment);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
 
 
     }

@@ -9,8 +9,9 @@ namespace ANONYMOUS_SURVEY.Repositories
     public class AdminRepository : IAdminRepository
     {
         private readonly ApplicationDbContext _context;
-        public AdminRepository(ApplicationDbContext context){
-            _context=context;
+        public AdminRepository(ApplicationDbContext context)
+        {
+            _context = context;
         }
         public async Task<Admin> AddAsync(Admin entity)
         {
@@ -21,8 +22,9 @@ namespace ANONYMOUS_SURVEY.Repositories
 
         public async Task DeleteAsync(int id)
         {
-            var admin=await _context.Admins.FindAsync(id);
-            if(admin!=null){
+            var admin = await _context.Admins.FindAsync(id);
+            if (admin != null)
+            {
                 _context.Admins.Remove(admin);
                 await _context.SaveChangesAsync();
             }
@@ -35,7 +37,7 @@ namespace ANONYMOUS_SURVEY.Repositories
 
         public async Task<Admin> GetByEmailAsync(string email)
         {
-            return await _context.Admins.Where(a=>a.Email==email)
+            return await _context.Admins.Where(a => a.Email == email)
             .FirstOrDefaultAsync();
         }
 

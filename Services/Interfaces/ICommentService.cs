@@ -8,7 +8,7 @@ namespace ANONYMOUS_SURVEY.Services.Interfaces
         Task<CommentWithRepliesDto> GetCommentWithRepliesAsync(int commentId);
         Task<IEnumerable<CommentDto>> GetCommentsBySubjectAsync(int subjectId);
         Task<CommentDto> CreateAnonymousCommentAsync(CreateCommentDto createCommentDto);
-        Task<CommentDto> CreateAdminCommentAsync(CreateAdminCommentDto createAdminCommentDto, int adminId);
+        Task<CommentDto> CreateAdminCommentAsync(CreateAdminCommentDto createAdminCommentDto);
  
     }
 }

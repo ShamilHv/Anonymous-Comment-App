@@ -16,6 +16,19 @@ namespace ANONYMOUS_SURVEY.Services
             _departmentRepository = departmentRepository;
         }
 
+        public async Task DeleteSubjectAsync(int subjectId)
+        {
+            await _departmentRepository.DeleteAsync(subjectId);
+        }
+
+        public async Task<IEnumerable<SubjectDto>> GetAllSubjectsAsync()
+        {
+            var subjects=await _subjectRepository.GetAllAsync();
+            if(!subjects.Any()){
+                throw new Exception("No Subjects as of now");
+            }
+            return subjects.Select(MapToSubjectDto);
+        }
         public async Task<SubjectDto> CreateSubjectAsync(CreateSubjectDto createSubjectDto)
         {
             var allSubjects = await _subjectRepository.GetAllAsync();
@@ -93,8 +106,10 @@ namespace ANONYMOUS_SURVEY.Services
                 HasFile = comment.FileId.HasValue,
                 FilePath = comment.File?.FilePath,
                 IsAdminComment = comment.IsAdminComment,
-                AdminName = comment.Admin?.AdminName
+                // AdminName = comment.Admin?.AdminName
             };
         }
+
+
     }
 }

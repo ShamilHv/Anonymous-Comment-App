@@ -22,7 +22,7 @@ namespace Anonymous_Survey.Services
             {
                 return null;
             }
-            if ((new PasswordHasher<Admin>().VerifyHashedPassword(admin, admin.PasswordHash, adminForLogin.Password))
+            if (new PasswordHasher<Admin>().VerifyHashedPassword(admin, admin.PasswordHash, adminForLogin.Password)
             == PasswordVerificationResult.Failed)
             {
                 return null;
